@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}سجل الفحوصات | CyberGuard{% endblock %}
+{% block content %}
+<section class="hero compact"><div class="eyebrow"><span></span> ACTIVITY LOG</div><h1>سجل <span>الفحوصات</span></h1><p class="lead">العمليات التي تم حفظها على هذا الخادم.</p></section>
+<section class="scanner-card history-card">
+  <div class="card-heading"><div><span class="mini-label">SCAN HISTORY</span><h2>النتائج السابقة</h2></div>
+  <form method="post" action="{{ url_for('clear_history') }}" onsubmit="return confirm('هل تريد حذف سجل الفحوصات؟')"><button class="delete-button" type="submit">حذف السجل</button></form></div>
+  {% if rows %}
+  <div class="table-scroll"><table><thead><tr><th>التاريخ والوقت</th><th>المدخل</th><th>النوع</th><th>النتيجة</th><th>الخطورة</th></tr></thead><tbody>
+  {% for row in rows %}<tr><td>{{ row['التاريخ والوقت'] }}</td><td class="url-cell" dir="ltr">{{ row['المدخل'] }}</td><td>{{ row['النوع'] }}</td><td>{{ row['النتيجة'] }}</td><td>{{ row['مستوى الخطورة'] or '—' }}</td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty"><span>▤</span><h3>لا توجد فحوصات محفوظة</h3><p>ستظهر النتائج هنا بعد إجراء أول فحص.</p></div>{% endif %}
+</section>
+{% endblock %}
