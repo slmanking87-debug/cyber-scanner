@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CyberGuard Scanner{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">⌁</span><span>CYBER<span class="accent">GUARD</span></span></a>
+    <nav><a href="{{ url_for('index') }}">الفاحص</a><a href="{{ url_for('history') }}">سجل الفحوصات</a></nav>
+    <span class="status"><i></i> نظام الفحص الأولي</span>
+  </header>
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}<div class="notice {{ category }}">{{ message }}</div>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>مشروع الأمن السيبراني · أداة توعوية للفحص الأولي وليست ضمانًا لأمان المواقع</footer>
+</body>
+</html>
